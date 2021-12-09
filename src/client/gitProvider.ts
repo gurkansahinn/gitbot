@@ -14,6 +14,10 @@ export class GitProvider {
     }
 
     public async getRepositoryContents(url: string): Promise<AxiosResponse> {
+        if (!this.instance) {
+            return Promise.reject('GitProvider not initialized');
+        }
+
         const response: AxiosResponse = await this.instance.get(url);
         return response;
     }

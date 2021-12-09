@@ -3,13 +3,15 @@ import settings from '../appsettings.json';
 import { GitProvider } from './gitProvider';
 import { AxiosResponse } from 'axios';
 
-class GitHubClient extends GitProvider {
+class GitHubClient {
+    private provider: GitProvider;
+
     constructor() {
-        super(settings.githubDomain);
+        this.provider = new GitProvider(settings.githubApiUrl);
     }
 
-    getRepositoryContents(url: string): Promise<AxiosResponse> {
-        return this.getRepositoryContents(url);
+    async getRepositryFiles(repositoryData: IRepositoriesData): Promise<AxiosResponse> {
+        return await this.provider.getRepositoryContents(`repos/${repositoryData.username}/${repositoryData.name}/contents`);
     }
 }
 
