@@ -1,0 +1,21 @@
+{
+  "name": "gitbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@atolye15/eslint-config": "^1.2.0",
+    "@atolye15/eslint-config-base-typescript": "^1.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint": "^8.4.1"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
+}
