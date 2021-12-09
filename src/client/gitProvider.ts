@@ -13,7 +13,7 @@ export class GitProvider {
         });
     }
 
-    public async getRepositories(url: string): Promise<AxiosResponse> {
+    public async getRepositoryContents(url: string): Promise<AxiosResponse> {
         const response: AxiosResponse = await this.instance.get(url);
         return response;
     }

@@ -8,8 +8,8 @@ class GitHubClient extends GitProvider {
         super(settings.githubDomain);
     }
 
-    getRepositories(url: string): Promise<AxiosResponse> {
-        return this.getRepositories(url);
+    getRepositoryContents(url: string): Promise<AxiosResponse> {
+        return this.getRepositoryContents(url);
     }
 }
 
