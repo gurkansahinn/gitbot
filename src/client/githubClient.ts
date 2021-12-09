@@ -10,8 +10,12 @@ class GitHubClient {
         this.provider = new GitProvider(settings.githubApiUrl);
     }
 
+    get Provider() {
+        return this.provider;
+    }
+
     async getRepositryFiles(repositoryData: IRepositoriesData): Promise<AxiosResponse> {
-        return await this.provider.getRepositoryContents(`repos/${repositoryData.username}/${repositoryData.name}/contents`);
+        return await this.Provider.getRepositoryContents(`repos/${repositoryData.username}/${repositoryData.name}/contents`);
     }
 }
 
