@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 export class GitProvider {
-    private instance: AxiosInstance | null = null;
+    private instance: AxiosInstance;
 
     constructor(private readonly serviceDomain: string) {
         this.instance = axios.create({
