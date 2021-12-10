@@ -1,12 +1,15 @@
-import { githubClient } from "./client/githubClient";
-import { NPMPackage } from "./packageService/npmPackage";
-import { PackageContext } from "./packageService/packageContext";
+import "./providers/githubProvider";
+
+import { GitProvider } from "./providers/gitProvider";
 
 async function main() {
-    const response = await githubClient.getRepositoryFiles({ username: "gurkansahinn", name: "ghostbuster_blacklist" });
-    console.log(response.data);
+    const provider = GitProvider.providers.get("github.com");
 
-    const context = new PackageContext(new NPMPackage());
-    console.log(await context.getPackageLastVersion("axios"));
+    if (!provider) {
+        return;
+    }
+
+    const response = await provider.getRepositoryContents({ name: "gurkansahinn", username: "gurkansahinn" });
+    console.log(response);
 }
 main();
