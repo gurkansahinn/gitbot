@@ -1,4 +1,3 @@
-import axios from 'axios';
 import settings from '../appsettings.json';
 
 import { GitHubClient } from '../clients/githubClient';
@@ -10,14 +9,7 @@ export class GithubProvider extends GitProvider {
     constructor() {
         super(settings.githubDomain);
 
-        const httpClient = axios.create({
-            baseURL: settings.githubApiUrl,
-            headers: {
-                'Accept': 'application/vnd.github.v3+json',
-            }
-        });
-
-        this.client = new GitHubClient(httpClient);
+        this.client = new GitHubClient();
     }
 
     public getRepositoryContents(repositoryData: IRepositoriesData): Promise<void> {
