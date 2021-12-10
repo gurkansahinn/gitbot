@@ -21,7 +21,7 @@ export class GithubProvider extends GitProvider {
         this.client = new GitHubClient(httpClient);
     }
 
-    public getRepositoryContents(repositoryData: IRepositoriesData): Promise<AxiosResponse> {
+    public getRepositoryContents(repositoryData: IRepositoriesData): Promise<void> {
         return this.client.getRepositoryContents(repositoryData);
     }
 }

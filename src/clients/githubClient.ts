@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosInstance } from 'axios';
 
 export class GitHubClient {
     private readonly client: AxiosInstance;
@@ -7,7 +7,7 @@ export class GitHubClient {
         this.client = _client;
     }
 
-    public async getRepositoryContents(repositoryData: IRepositoriesData): Promise<AxiosResponse> {
+    public async getRepositoryContents(repositoryData: IRepositoriesData): Promise<void> {
         return this.client.get(`/repos/${repositoryData.username}/${repositoryData.name}/contents`);
     }
 }

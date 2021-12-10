@@ -1,9 +1,3 @@
-import { AxiosResponse } from "axios";
-
-interface IGitProvider {
-    getRepositoryContents(repositoryData: IRepositoriesData): Promise<AxiosResponse>;
-}
-
 export class GitProvider implements IGitProvider {
     static providers: Map<string, GitProvider> = new Map();
 
@@ -11,7 +5,7 @@ export class GitProvider implements IGitProvider {
         GitProvider.providers.set(providerDomain, this);
     }
 
-    getRepositoryContents(repositoryData: IRepositoriesData): Promise<AxiosResponse> {
+    getRepositoryContents(repositoryData: IRepositoriesData): Promise<void> {
         throw new Error("Method not implemented." + repositoryData);
     }
 }
