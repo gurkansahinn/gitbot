@@ -5,7 +5,7 @@ export class GitProvider implements IGitProvider {
         GitProvider.providers.set(providerDomain, this);
     }
 
-    getRepositoryContents(repositoryData: IRepositoriesData): Promise<void> {
+    public getRepositoryContents(repositoryData: IRepositoriesData): Promise<void> {
         throw new Error("Method not implemented." + repositoryData);
     }
 }

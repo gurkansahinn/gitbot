@@ -1,5 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
-
+import axios from 'axios';
 import settings from '../appsettings.json';
 
 import { GitHubClient } from '../clients/githubClient';
@@ -25,5 +24,3 @@ export class GithubProvider extends GitProvider {
         return this.client.getRepositoryContents(repositoryData);
     }
 }
-
-export const githubProvider = new GithubProvider();

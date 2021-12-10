@@ -1,8 +1,10 @@
-import "./providers/githubProvider";
-
+import { ProviderCollection } from "./extensions/providerCollectionGit";
 import { GitProvider } from "./providers/gitProvider";
 
 async function main() {
+    ProviderCollection.loadGitProviders();
+
+    // test
     const provider = GitProvider.providers.get("github.com");
 
     if (!provider) {
