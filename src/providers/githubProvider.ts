@@ -9,10 +9,11 @@ export class GithubProvider extends GitProvider {
     constructor() {
         super(settings.githubDomain);
 
-        this.client = new GitHubClient();
+        this.client = new GitHubClient(settings.githubRawUrl);
     }
 
-    public getRepositoryContents(repositoryData: IRepositoriesData): Promise<void> {
-        return this.client.getRepositoryContents(repositoryData);
+    public async getRepositoryContents(repositoryData: IRepositoriesData, fileName: string) {
+        const response = await this.client.getRepositoryContents(repositoryData, fileName);
+        return response.data;
     }
 }

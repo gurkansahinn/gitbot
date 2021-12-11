@@ -1,17 +1,12 @@
 import { ProviderCollection } from "./extensions/providerCollectionGit";
-import { GitProvider } from "./providers/gitProvider";
+import { PackageCollection } from "./extensions/packageCollection";
+import { PackageContext } from "./services/packageContext";
 
 async function main() {
     ProviderCollection.loadGitProviders();
+    PackageCollection.loadPackages();
 
-    // test
-    const provider = GitProvider.providers.get("github.com");
-
-    if (!provider) {
-        return;
-    }
-
-    const response = await provider.getRepositoryContents({ name: "gurkansahinn", username: "gurkansahinn" });
-    console.log(response);
+    const res = await PackageContext.getDependencyFiles("package.json", "github.com", { username: "gurkansahinn", name: "ghostbuster_blacklist", branch: "master" });
+    console.log(res);
 }
 main();

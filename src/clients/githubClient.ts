@@ -1,20 +1,18 @@
-import settings from '../appsettings.json';
-
 import axios, { AxiosInstance } from 'axios';
 
 export class GitHubClient {
     private readonly client: AxiosInstance;
 
-    constructor() {
+    constructor(baseUrl: string) {
         this.client = axios.create({
-            baseURL: settings.githubApiUrl,
+            baseURL: baseUrl,
             headers: {
-                'Accept': 'application/vnd.github.v3+json',
+                Accept: 'application/vnd.github.v3+json',
             }
         });;
     }
 
-    public async getRepositoryContents(repositoryData: IRepositoriesData): Promise<void> {
-        return this.client.get(`/repos/${repositoryData.username}/${repositoryData.name}/contents`);
+    public async getRepositoryContents(repositoryData: IRepositoriesData, fileName: string) {
+        return await this.client.get(`${repositoryData.username}/${repositoryData.name}/${repositoryData.branch}/${fileName}`);
     }
 }

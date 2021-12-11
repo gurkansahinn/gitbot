@@ -1,7 +1,9 @@
+import axios from "axios";
+
 import { GitProvider } from "../../providers/gitProvider";
 
-export class ComposerPackage implements PackageStrategy {
-    public fileName: string = "composer.json";
+export class NodePackage implements PackageStrategy {
+    public fileName: string = "package.json";
 
     public async getDependencyFiles(providerDomain: string, repositoryData: IRepositoriesData) {
         const provider = GitProvider.providers.get(providerDomain);
@@ -15,6 +17,8 @@ export class ComposerPackage implements PackageStrategy {
     }
 
     public async getPackageLastVersion(packageName: string): Promise<void> {
-        console.log(packageName);
+        const response = await axios.get(`https://unpkg.com/${packageName}/package.json`);
+
+        return response.data.version;
     }
 }

@@ -1,3 +1,4 @@
 declare interface IGitProvider {
-    getRepositoryContents(repositoryData: IRepositoriesData): Promise<void>;
+    getRepositoryContents(repositoryData: IRepositoriesData, fileName: string);
+    getDependencyListFromContents(contents: Array<any>);
 }
