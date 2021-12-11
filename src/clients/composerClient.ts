@@ -13,6 +13,6 @@ export class ComposerClient {
     }
 
     public async getPackageVersion(packageName: string): Promise<string> {
-        return await (await this.client.get(`${packageName}/composer.json`)).data.version;
+        return await (await this.client.get(`${packageName}.json`)).data.version;
     }
 }
