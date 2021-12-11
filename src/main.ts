@@ -6,7 +6,7 @@ async function main() {
     ProviderCollection.loadGitProviders();
     PackageCollection.loadPackages();
 
-    const res = await PackageContext.getDependencyFiles("package.json", "github.com", { username: "gurkansahinn", name: "ghostbuster_blacklist", branch: "master" });
-    console.log(res);
+    const outdatedDependencyFiles = await PackageContext.getOutdatedDependencyFiles("package.json", "github.com", { username: "gurkansahinn", name: "ghostbuster_blacklist", branch: "master" });
+    console.log(outdatedDependencyFiles);
 }
 main();

@@ -1,6 +1,7 @@
 declare interface PackageStrategy {
     public fileName: string;
 
-    getDependencyFiles(providerDomain: string, repositoryData: IRepositoriesData);
-    getPackageLastVersion(packageName: string): Promise<void>;
+    getOutdatedDependencyFiles(providerDomain: string, repositoryData: IRepositoriesData);
+    separateOutdatedDependencyFiles(packageContents: any);
+    getPackageLastVersion(packageName: string): Promise<string>;
 }
