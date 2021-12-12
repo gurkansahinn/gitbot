@@ -30,7 +30,7 @@ export class NodePackage implements PackageStrategy {
 
         for (const [packageName, packageCurrentVersion] of Object.entries(packageContents.dependencies)) {
             const currentVersion = clearVersionKeys(packageCurrentVersion);
-            const lastVersion = await this.getPackageLastVersion(packageName);
+            const lastVersion = clearVersionKeys(await this.getPackageLastVersion(packageName));
 
             if (currentVersion !== lastVersion) {
                 outDatedDependencyFiles.push({ name: packageName, currentVersion: currentVersion, lastVersion: lastVersion });

@@ -9,10 +9,10 @@ export class ComposerClient {
             headers: {
                 'Content-Type': 'application/json',
             }
-        });;
+        });
     }
 
     public async getPackageVersion(packageName: string): Promise<string> {
-        return await (await this.client.get(`${packageName}.json`)).data.version;
+        return await (await this.client.get(`${packageName}.json`)).data.packages[packageName][0].version;
     }
 }

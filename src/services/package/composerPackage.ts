@@ -2,6 +2,7 @@ import settings from "../../appsettings.json";
 
 import { ComposerClient } from "../../clients/composerClient";
 import { GitProvider } from "../../providers/gitProvider";
+import { clearVersionKeys } from "../../utilitys/clearVersionKeys";
 
 export class ComposerPackage implements PackageStrategy {
     private client: ComposerClient;
@@ -19,12 +20,27 @@ export class ComposerPackage implements PackageStrategy {
             throw new Error("Provider not found");
         }
 
-        const response = await provider.getRepositoryContents(repositoryData, this.fileName);
-        console.log(response)
+        const packageContents = await provider.getRepositoryContents(repositoryData, this.fileName);
+        return this.separateOutdatedDependencyFiles(packageContents);
     }
 
-    public async separateOutdatedDependencyFiles() {
-        // TODO
+    public async separateOutdatedDependencyFiles(packageContents: any) {
+        const outDatedDependencyFiles: Array<IOutDatedDependencyFile> = [];
+
+        for (const [packageName, packageCurrentVersion] of Object.entries(packageContents.require)) {
+            if (packageName === "php") {
+                continue;
+            }
+
+            const currentVersion = clearVersionKeys(packageCurrentVersion);
+            const lastVersion = clearVersionKeys(await this.getPackageLastVersion(packageName));
+
+            if (currentVersion !== lastVersion) {
+                outDatedDependencyFiles.push({ name: packageName, currentVersion: currentVersion, lastVersion: lastVersion });
+            }
+        }
+
+        return outDatedDependencyFiles;
     }
 
     public async getPackageLastVersion(packageName: string): Promise<string> {
