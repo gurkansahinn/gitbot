@@ -1,12 +1,12 @@
 export class PackageContext {
-    static strategies: Map<string, PackageStrategy> = new Map();
+    static _strategies: Map<string, PackageStrategy> = new Map();
 
     constructor(packageStrategy: PackageStrategy) {
-        PackageContext.strategies.set(packageStrategy.fileName, packageStrategy);
+        PackageContext._strategies.set(packageStrategy.fileName, packageStrategy);
     }
 
     static async getOutdatedDependencyFiles(fileName: string, providerDomain: string, repositoryData: IRepositoriesData) {
-        const packageStrategy = PackageContext.strategies.get(fileName);
+        const packageStrategy = PackageContext._strategies.get(fileName);
 
         if (!packageStrategy) {
             throw new Error(`Package strategy for ${fileName} not found`);
@@ -16,7 +16,7 @@ export class PackageContext {
     }
 
     static async getPackageLastVersion(fileName: string, packageName: string): Promise<string> {
-        const packageStrategy = PackageContext.strategies.get(fileName);
+        const packageStrategy = PackageContext._strategies.get(fileName);
 
         if (!packageStrategy) {
             throw new Error(`Package strategy for ${fileName} not found`);
