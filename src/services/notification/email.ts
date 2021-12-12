@@ -6,27 +6,25 @@ export class EmailService {
 
     constructor(emailConfig: IEmailConfig) {
         this.transporter = nodemailer.createTransport({
+            service: "Gmail",
             host: emailConfig.hostName,
             port: emailConfig.port,
-            secure: false,
-            requireTLS: true,
             auth: {
                 user: emailConfig.username,
                 pass: emailConfig.password,
             },
-            logger: true
         });
     }
 
-    public async sendEmail(email: string, message: string) {
+    public async sendEmail(email: string, subject: string, message: string) {
         const response = await this.transporter.sendMail({
             from: settings.applicationName,
             to: email,
-            subject: "asdgasg",
+            subject: subject,
             text: message,
             headers: {}
         })
 
-
+        return response;
     }
 }

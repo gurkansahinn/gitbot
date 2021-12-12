@@ -5,7 +5,7 @@ export class PackageContext {
         PackageContext._strategies.set(packageStrategy.fileName, packageStrategy);
     }
 
-    static async getOutdatedDependencyFiles(fileName: string, providerDomain: string, repositoryData: IRepositoriesData) {
+    static async getOutdatedDependencyFiles(fileName: string, providerDomain: string, repositoryData: IRepositoriesData): Promise<Array<IOutDatedDependencyFile>> {
         const packageStrategy = PackageContext._strategies.get(fileName);
 
         if (!packageStrategy) {
