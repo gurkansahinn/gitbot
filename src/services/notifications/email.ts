@@ -6,7 +6,6 @@ export class EmailService {
 
     constructor(emailConfig: IEmailConfig) {
         this.transporter = nodemailer.createTransport({
-            service: "Gmail",
             host: emailConfig.hostName,
             port: emailConfig.port,
             auth: {

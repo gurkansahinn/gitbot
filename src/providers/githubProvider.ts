@@ -14,6 +14,12 @@ export class GithubProvider extends GitProvider {
 
     public async getRepositoryContents(repositoryData: IRepositoriesData, fileName: string) {
         const response = await this.client.getRepositoryContents(repositoryData, fileName);
+
+        console.log(response);
+        if (!response) {
+            return false;
+        }
+
         return response.data;
     }
 }

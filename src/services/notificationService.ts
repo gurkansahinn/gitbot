@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { EmailService } from "./notification/email";
+import { EmailService } from "./notifications/email";
+import { MailOrderService } from "./mailOrderService";
 
 export class NotificationService {
     private emailService: EmailService;
@@ -17,6 +18,14 @@ export class NotificationService {
 
     public sendNotification(email: string, subject: string, message: string) {
         this.emailService.sendEmail(email, subject, message);
+    }
+
+    public sendOutDatedNotificationToMultiple(subject: string, outdatedDependencyFile: Array<IOutDatedDependencyFile>, emails: string[]) {
+        const message = MailOrderService.getMailTemplate(outdatedDependencyFile);
+
+        for (const email of emails) {
+            this.emailService.sendEmail(email, subject, message);
+        }
     }
 }
 

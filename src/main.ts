@@ -1,22 +1,34 @@
+import './api/main';
 import './services/notificationService';
 
 import { ProviderCollection } from "./extensions/providerCollectionGit";
 import { PackageCollection } from "./extensions/packageCollection";
-import { PackageContext } from "./services/packageContext";
-import { notificationService } from './services/notificationService';
+import { PackageCronService } from './services/packageCronService';
 
 async function main() {
     ProviderCollection.loadGitProviders();
     PackageCollection.loadPackages();
 
-    const outdatedDependencyFiles: Array<IOutDatedDependencyFile> = await PackageContext.getOutdatedDependencyFiles("composer.json", "github.com", { username: "composer", name: "composer", branch: "main" });
-
-    let emailMessage = "";
-
-    for (const outdatedDependencyFile of outdatedDependencyFiles) {
-        emailMessage += `${outdatedDependencyFile.name} Current Version: ${outdatedDependencyFile.currentVersion}, Last Version: ${outdatedDependencyFile.lastVersion} is outdated.\n`;
-    }
-
-    notificationService.sendNotification("gurkansahin9075@gmail.com", "Gitbot", emailMessage);
+    PackageCronService.start();
 }
 main();
+
+/*const repository = await prismaService.repositories.create({
+        data: {
+            providerDomain: "github.com",
+            name: 'gurkansahinn',
+            owner: 'gurkansahinn',
+            branch: 'master',
+            fileName: 'package.json',
+        }
+
+    });
+
+    const mails = await prismaService.mails.create({
+        data: {
+            repositoryId: repository.id,
+            emailAddress: "gurkansahin9075@gmail.com"
+        }
+    });
+
+    console.log(repository, mails);*/

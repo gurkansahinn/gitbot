@@ -4,13 +4,14 @@
   "description": "",
   "main": "build/main.js",
   "scripts": {
-    "start": "node ./build/main.js"
+    "start": "node ./build/main.js &"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@atolye15/eslint-config": "^1.2.0",
     "@atolye15/eslint-config-base-typescript": "^1.2.0",
+    "@types/express": "^4.17.13",
     "@types/node": "^16.11.12",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
@@ -18,9 +19,12 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@prisma/client": "^3.6.0",
     "@types/nodemailer": "^6.4.4",
     "axios": "^0.24.0",
+    "cron-decorators": "^0.1.5",
     "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "nodemailer": "^6.7.2"
   }
 }

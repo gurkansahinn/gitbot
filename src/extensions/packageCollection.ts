@@ -1,5 +1,5 @@
-import { ComposerPackage } from "../services/package/composerPackage";
-import { NodePackage } from "../services/package/nodePackage";
+import { ComposerPackage } from "../services/packages/composerPackage";
+import { NodePackage } from "../services/packages/nodePackage";
 import { PackageContext } from "../services/packageContext";
 
 export class PackageCollection {

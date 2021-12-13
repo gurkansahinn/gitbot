@@ -28,7 +28,17 @@ export class NodePackage implements PackageStrategy {
     public async separateOutdatedDependencyFiles(packageContents: any) {
         const outDatedDependencyFiles: Array<IOutDatedDependencyFile> = [];
 
+        console.log(packageContents);
         for (const [packageName, packageCurrentVersion] of Object.entries(packageContents.dependencies)) {
+            const currentVersion = clearVersionKeys(packageCurrentVersion);
+            const lastVersion = clearVersionKeys(await this.getPackageLastVersion(packageName));
+
+            if (currentVersion !== lastVersion) {
+                outDatedDependencyFiles.push({ name: packageName, currentVersion: currentVersion, lastVersion: lastVersion });
+            }
+        }
+
+        for (const [packageName, packageCurrentVersion] of Object.entries(packageContents.devDependencies)) {
             const currentVersion = clearVersionKeys(packageCurrentVersion);
             const lastVersion = clearVersionKeys(await this.getPackageLastVersion(packageName));
 

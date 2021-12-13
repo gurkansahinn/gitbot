@@ -1,5 +1,5 @@
 declare interface IRepositoriesData {
-    username: string;
+    owner: string;
     name: string;
     branch: string;
 }
